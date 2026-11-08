@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Admin Panel - YussXy Store</title>
+
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="description" content="Panel admin untuk kelola saldo dan user YussXy Store">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Admin YussXy">
+
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="apple-touch-icon" href="logo.jpg">
+    <link rel="manifest" href="manifest.json">
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="admin-app">
+
+    <header class="admin-header">
+        <div class="header-left">
+            <div class="header-badge">
+                <i class="ri-shield-user-line"></i>
+            </div>
+            <div class="header-title">
+                <h1>Admin Panel</h1>
+                <p>YussXy Store</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="theme-btn" id="themeBtn" title="Ganti Tema">
+                <i class="ri-moon-line" id="themeIcon"></i>
+            </button>
+            <div class="header-clock">
+                <span class="clock-time" id="clockTime">00:00</span>
+                <span class="clock-date" id="clockDate">-</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-card">
+        <div class="hero-bg-icon">
+            <i class="ri-store-3-line"></i>
+        </div>
+        <div class="hero-content">
+            <div class="hero-greeting" id="heroGreeting">Selamat Pagi</div>
+            <div class="hero-title">Panel Admin</div>
+            <div class="hero-sub">Kelola saldo dan pantau aktivitas user</div>
+        </div>
+        <div class="hero-dots">
+            <span></span><span></span><span></span>
+        </div>
+    </section>
+
+    <main class="tab-content-wrapper">
+
+        <div class="tab-content active" id="tab-home">
+
+            <section class="dashboard-section">
+                <div class="dashboard-grid">
+                    <div class="dash-card purple">
+                        <div class="dash-icon"><i class="ri-wallet-3-line"></i></div>
+                        <div class="dash-info">
+                            <span class="dash-label">Total Masuk</span>
+                            <span class="dash-value" id="dashTotalMasuk">Rp 0</span>
+                        </div>
+                    </div>
+                    <div class="dash-card green">
+                        <div class="dash-icon"><i class="ri-add-circle-line"></i></div>
+                        <div class="dash-info">
+                            <span class="dash-label">Total Add</span>
+                            <span class="dash-value" id="dashTotalAdd">0x</span>
+                        </div>
+                    </div>
+                    <div class="dash-card blue">
+                        <div class="dash-icon"><i class="ri-calendar-line"></i></div>
+                        <div class="dash-info">
+                            <span class="dash-label">Hari Ini</span>
+                            <span class="dash-value" id="dashHariIni">0x</span>
+                        </div>
+                    </div>
+                    <div class="dash-card pink">
+                        <div class="dash-icon"><i class="ri-time-line"></i></div>
+                        <div class="dash-info">
+                            <span class="dash-label">Terakhir</span>
+                            <span class="dash-value" id="dashTerakhir">-</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profit-summary-section">
+                <div class="profit-summary">
+                    <div class="profit-card green">
+                        <div class="profit-icon"><i class="ri-arrow-down-line"></i></div>
+                        <div class="profit-info">
+                            <span class="profit-label">Pemasukan</span>
+                            <span class="profit-value" id="profitPemasukan">Rp 0</span>
+                        </div>
+                    </div>
+                    <div class="profit-card pink">
+                        <div class="profit-icon"><i class="ri-arrow-up-line"></i></div>
+                        <div class="profit-info">
+                            <span class="profit-label">Pengeluaran</span>
+                            <span class="profit-value" id="profitPengeluaran">Rp 0</span>
+                        </div>
+                    </div>
+                    <div class="profit-card purple">
+                        <div class="profit-icon"><i class="ri-line-chart-line"></i></div>
+                        <div class="profit-info">
+                            <span class="profit-label">Profit</span>
+                            <span class="profit-value" id="profitBersih">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quick-menu-section">
+                <div class="section-title">
+                    <i class="ri-apps-2-line"></i>
+                    <span>Menu Cepat</span>
+                </div>
+                <div class="quick-menu-grid">
+                    <button class="quick-menu-item" data-tab="user">
+                        <i class="ri-user-line"></i>
+                        <span>Kelola User</span>
+                    </button>
+                    <button class="quick-menu-item" data-tab="saldo">
+                        <i class="ri-wallet-line"></i>
+                        <span>Kelola Saldo</span>
+                    </button>
+                    <button class="quick-menu-item" data-tab="transaksi">
+                        <i class="ri-file-list-3-line"></i>
+                        <span>Transaksi</span>
+                    </button>
+                    <button class="quick-menu-item" data-tab="profit">
+                        <i class="ri-money-dollar-circle-line"></i>
+                        <span>Profit</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="recent-section">
+                <div class="section-title">
+                    <i class="ri-fire-line"></i>
+                    <span>Aktivitas Terakhir</span>
+                </div>
+                <div class="recent-list" id="recentList">
+                    <div class="recent-empty">
+                        <i class="ri-loader-4-line spin"></i>
+                        <p>Memuat...</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="tab-content" id="tab-user">
+
+            <div class="search-card">
+                <div class="search-input-wrapper">
+                    <i class="ri-search-2-line"></i>
+                    <input type="text" id="userSearchInput" placeholder="Cari username / HP / device ID..." autocomplete="off">
+                    <button class="search-btn" id="userSearchBtn">
+                        <i class="ri-arrow-right-line"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="tabs-mini">
+                <button class="tabs-mini-btn active" data-view="detail">Detail User</button>
+                <button class="tabs-mini-btn" data-view="list">Semua User</button>
+                <button class="tabs-mini-btn" data-view="banned">Banned</button>
+            </div>
+
+            <div class="user-view" id="view-detail">
+
+                <div class="user-profile-card" id="userProfileCard" style="display:none;">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="profileAvatar">U</div>
+                        <div class="profile-info">
+                            <div class="profile-username" id="profileUsername">-</div>
+                            <div class="profile-phone" id="profilePhone">-</div>
+                            <div class="profile-role" id="profileRole">user</div>
+                        </div>
+                    </div>
+
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Saldo</span>
+                            <span class="profile-stat-value green" id="profileBalance">Rp 0</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-label">Total Keluar</span>
+                            <span class="profile-stat-value pink" id="profileSpent">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-detail-list">
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-user-line"></i> Username</span>
+                            <span class="detail-value" id="detailUsername">-</span>
+                        </div>
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-phone-line"></i> Nomor HP</span>
+                            <span class="detail-value" id="detailPhone">-</span>
+                        </div>
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-lock-password-line"></i> Password</span>
+                            <span class="detail-value mono" id="detailPassword" data-password="-">••••••••</span>
+                            <button class="toggle-pass-btn" id="togglePasswordBtn">
+                                <i class="ri-eye-line"></i>
+                            </button>
+                        </div>
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-shield-user-line"></i> Role</span>
+                            <span class="detail-value" id="detailRole">-</span>
+                        </div>
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-fingerprint-line"></i> Device ID</span>
+                            <span class="detail-value mono" id="detailDevice">-</span>
+                        </div>
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-calendar-line"></i> Bergabung</span>
+                            <span class="detail-value" id="detailJoin">-</span>
+                        </div>
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-shopping-bag-3-line"></i> Jml Transaksi</span>
+                            <span class="detail-value" id="detailTrxCount">0</span>
+                        </div>
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-login-circle-line"></i> Login Count</span>
+                            <span class="detail-value" id="detailLoginCount">0</span>
+                        </div>
+                        <div class="profile-detail-row">
+                            <span class="detail-label"><i class="ri-time-line"></i> Last Login</span>
+                            <span class="detail-value" id="detailLastLogin">-</span>
+                        </div>
+                    </div>
+
+                    <div class="user-action-buttons">
+                        <button class="user-action-btn green" id="userAddSaldoBtn">
+                            <i class="ri-add-circle-line"></i>
+                            <span>Tambah Saldo</span>
+                        </button>
+                        <button class="user-action-btn pink" id="userSubSaldoBtn">
+                            <i class="ri-subtract-line"></i>
+                            <span>Kurangi Saldo</span>
+                        </button>
+                        <button class="user-action-btn blue" id="userSetSaldoBtn">
+                            <i class="ri-equalizer-line"></i>
+                            <span>Set Saldo</span>
+                        </button>
+                        <button class="user-action-btn purple" id="userEditProfileBtn">
+                            <i class="ri-edit-line"></i>
+                            <span>Edit Profile</span>
+                        </button>
+                        <button class="user-action-btn yellow" id="userResetDeviceBtn">
+                            <i class="ri-refresh-line"></i>
+                            <span>Reset Device</span>
+                        </button>
+                        <button class="user-action-btn dark" id="userForceLogoutBtn">
+                            <i class="ri-logout-box-line"></i>
+                            <span>Force Logout</span>
+                        </button>
+                        <button class="user-action-btn blue" id="userHistoryBtn">
+                            <i class="ri-history-line"></i>
+                            <span>Lihat Riwayat</span>
+                        </button>
+                        <button class="user-action-btn pink" id="userClearTrxBtn">
+                            <i class="ri-delete-bin-line"></i>
+                            <span>Hapus Riwayat</span>
+                        </button>
+                        <button class="user-action-btn pink full-width" id="userBanBtn">
+                            <i class="ri-forbid-2-line"></i>
+                            <span>Ban User</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="empty-state" id="userEmptyState">
+                    <i class="ri-user-search-line"></i>
+                    <p>Cari user untuk mulai</p>
+                    <span>Masukkan username atau nomor HP</span>
+                </div>
+
+            </div>
+
+            <div class="user-view" id="view-list" style="display:none;">
+                <div class="list-info-bar">
+                    <i class="ri-information-line"></i>
+                    <span>Total <strong id="totalUserCount">0</strong> user terdaftar</span>
+                </div>
+                <div class="user-list-container" id="userListContainer">
+                    <div class="empty-state">
+                        <i class="ri-loader-4-line spin"></i>
+                        <p>Memuat daftar user...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-view" id="view-banned" style="display:none;">
+                <div class="list-info-bar">
+                    <i class="ri-forbid-2-line"></i>
+                    <span><strong id="totalBannedCount">0</strong> user di-ban</span>
+                    <button class="refresh-list-btn" id="refreshBannedBtn">
+                        <i class="ri-refresh-line"></i>
+                    </button>
+                </div>
+                <div class="banned-list-container" id="bannedListContainer">
+                    <div class="empty-state">
+                        <i class="ri-loader-4-line spin"></i>
+                        <p>Memuat daftar banned...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-history-card" id="userHistoryCard" style="display:none;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="ri-history-line"></i>
+                        <span>Riwayat Transaksi</span>
+                    </div>
+                    <button class="close-btn" id="closeUserHistoryBtn">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+                <div class="user-history-list" id="userHistoryList"></div>
+                <div class="user-history-summary" id="userHistorySummary"></div>
+            </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-saldo">
+
+            <div class="form-card">
+                <div class="form-title-small">
+                    <i class="ri-wallet-3-line"></i>
+                    <span>Kelola Saldo User</span>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="ri-user-line"></i> Username</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="saldoUsername" placeholder="username user" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="ri-exchange-line"></i> Aksi</label>
+                    <div class="type-selector-3">
+                        <button class="type-btn active" data-action="add">
+                            <i class="ri-add-line"></i> Tambah
+                        </button>
+                        <button class="type-btn" data-action="sub">
+                            <i class="ri-subtract-line"></i> Kurang
+                        </button>
+                        <button class="type-btn" data-action="set">
+                            <i class="ri-equalizer-line"></i> Set
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="ri-money-dollar-circle-line"></i> Jumlah Saldo</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">Rp</span>
+                        <input type="number" id="saldoAmount" placeholder="0" min="0" step="1000" inputmode="numeric">
+                    </div>
+                    <div class="quick-amount">
+                        <button class="quick-amt-btn" data-amount="5000">5K</button>
+                        <button class="quick-amt-btn" data-amount="10000">10K</button>
+                        <button class="quick-amt-btn" data-amount="25000">25K</button>
+                        <button class="quick-amt-btn" data-amount="50000">50K</button>
+                        <button class="quick-amt-btn" data-amount="100000">100K</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="ri-chat-1-line"></i> Catatan</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="saldoNote" placeholder="opsional" autocomplete="off">
+                    </div>
+                </div>
+
+                <button class="submit-btn" id="saldoSubmitBtn">
+                    <i class="ri-save-line"></i>
+                    <span>Proses Sekarang</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-profit">
+
+            <div class="form-card">
+                <div class="form-title-small">
+                    <i class="ri-money-dollar-circle-line"></i>
+                    <span>Catat Profit Manual</span>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="ri-exchange-line"></i> Tipe</label>
+                    <div class="type-selector">
+                        <button class="type-btn active" data-type="pemasukan">
+                            <i class="ri-arrow-down-line"></i> Pemasukan
+                        </button>
+                        <button class="type-btn" data-type="pengeluaran">
+                            <i class="ri-arrow-up-line"></i> Pengeluaran
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="ri-price-tag-3-line"></i> Kategori</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="profitKategori" placeholder="contoh: Penjualan APK" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="ri-money-dollar-circle-line"></i> Jumlah</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">Rp</span>
+                        <input type="number" id="profitAmount" placeholder="0" min="1" inputmode="numeric">
+                    </div>
+                    <div class="quick-amount">
+                        <button class="quick-profit-btn" data-amount="1000">1K</button>
+                        <button class="quick-profit-btn" data-amount="5000">5K</button>
+                        <button class="quick-profit-btn" data-amount="10000">10K</button>
+                        <button class="quick-profit-btn" data-amount="50000">50K</button>
+                        <button class="quick-profit-btn" data-amount="100000">100K</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="ri-chat-1-line"></i> Catatan</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="profitNote" placeholder="opsional" autocomplete="off">
+                    </div>
+                </div>
+
+                <button class="submit-btn" id="submitProfitBtn">
+                    <i class="ri-save-line"></i>
+                    <span>Simpan Catatan</span>
+                </button>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-input-wrapper">
+                    <i class="ri-filter-3-line"></i>
+                    <select id="filterProfitType" class="filter-select">
+                        <option value="all">Semua Tipe</option>
+                        <option value="pemasukan">Pemasukan</option>
+                        <option value="pengeluaran">Pengeluaran</option>
+                    </select>
+                </div>
+                <button class="clear-btn" id="clearProfit">
+                    <i class="ri-delete-bin-line"></i>
+                </button>
+            </div>
+
+            <div class="riwayat-card">
+                <div class="riwayat-header">
+                    <div class="riwayat-title">
+                        <i class="ri-file-list-3-line"></i>
+                        <span>Riwayat Profit</span>
+                    </div>
+                    <span class="riwayat-count" id="profitCount">0</span>
+                </div>
+                <div class="riwayat-list" id="profitList">
+                    <div class="riwayat-empty">
+                        <i class="ri-inbox-line"></i>
+                        <p>Belum ada catatan</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-transaksi">
+
+            <div class="stats-row">
+                <div class="stats-mini">
+                    <span class="stats-mini-label">Total Transaksi</span>
+                    <span class="stats-mini-value" id="totalTransaksiAll">0</span>
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <div class="filter-input-wrapper">
+                    <i class="ri-search-line"></i>
+                    <input type="text" id="filterTrxInput" placeholder="Filter username / TRX ID..." autocomplete="off">
+                </div>
+                <button class="clear-btn" id="refreshTrxBtn">
+                    <i class="ri-refresh-line"></i>
+                </button>
+            </div>
+
+            <div class="riwayat-card">
+                <div class="riwayat-header">
+                    <div class="riwayat-title">
+                        <i class="ri-list-check-2"></i>
+                        <span>Semua Transaksi</span>
+                    </div>
+                    <span class="riwayat-count" id="transaksiCount">0</span>
+                </div>
+                <div class="riwayat-list" id="transaksiList">
+                    <div class="riwayat-empty">
+                        <i class="ri-loader-4-line spin"></i>
+                        <p>Memuat...</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-stats">
+
+            <div class="stats-grid-large">
+                <div class="stat-large purple">
+                    <div class="stat-large-icon"><i class="ri-group-line"></i></div>
+                    <div class="stat-large-info">
+                        <span class="stat-large-label">Total User</span>
+                        <span class="stat-large-value" id="statsTotalUser">0</span>
+                    </div>
+                </div>
+                <div class="stat-large green">
+                    <div class="stat-large-icon"><i class="ri-shopping-bag-3-line"></i></div>
+                    <div class="stat-large-info">
+                        <span class="stat-large-label">Total Transaksi</span>
+                        <span class="stat-large-value" id="statsTotalTrx">0</span>
+                    </div>
+                </div>
+                <div class="stat-large blue">
+                    <div class="stat-large-icon"><i class="ri-money-dollar-circle-line"></i></div>
+                    <div class="stat-large-info">
+                        <span class="stat-large-label">Saldo Beredar</span>
+                        <span class="stat-large-value" id="statsTotalSaldo">Rp 0</span>
+                    </div>
+                </div>
+                <div class="stat-large pink">
+                    <div class="stat-large-icon"><i class="ri-forbid-2-line"></i></div>
+                    <div class="stat-large-info">
+                        <span class="stat-large-label">User Banned</span>
+                        <span class="stat-large-value" id="statsTotalBanned">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <i class="ri-trophy-line"></i>
+                <span>Top 10 Pembeli</span>
+            </div>
+            <div class="rank-list" id="topSpendersList">
+                <div class="empty-state">
+                    <i class="ri-loader-4-line spin"></i>
+                    <p>Memuat...</p>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <i class="ri-fire-line"></i>
+                <span>Top User Aktif</span>
+            </div>
+            <div class="rank-list" id="topUsersList">
+                <div class="empty-state">
+                    <i class="ri-loader-4-line spin"></i>
+                    <p>Memuat...</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-settings">
+
+            <div class="settings-section">
+                <div class="section-title">
+                    <i class="ri-palette-line"></i>
+                    <span>Tema Panel</span>
+                </div>
+                <div class="theme-options">
+                    <button class="theme-option active" data-theme="light">
+                        <div class="theme-preview theme-preview-light">
+                            <span></span><span></span>
+                        </div>
+                        <span class="theme-name">Ungu Light</span>
+                    </button>
+                    <button class="theme-option" data-theme="dark">
+                        <div class="theme-preview theme-preview-dark">
+                            <span></span><span></span>
+                        </div>
+                        <span class="theme-name">Dark Brutalism</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="section-title">
+                    <i class="ri-download-2-line"></i>
+                    <span>Install Aplikasi</span>
+                </div>
+                <p class="settings-desc">Pasang panel admin ini ke layar utama HP kamu.</p>
+                <button class="danger-btn" id="settingsInstallBtn" style="background:var(--accent);">
+                    <i class="ri-download-2-line"></i>
+                    <span>Install Sekarang</span>
+                </button>
+            </div>
+
+            <div class="settings-section">
+                <div class="section-title">
+                    <i class="ri-information-line"></i>
+                    <span>Info Panel</span>
+                </div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label"><i class="ri-server-line"></i> Backend</span>
+                        <span class="info-value" id="infoBackend">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label"><i class="ri-calendar-line"></i> Versi</span>
+                        <span class="info-value">v2.0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label"><i class="ri-time-line"></i> Uptime</span>
+                        <span class="info-value" id="infoUptime">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="section-title">
+                    <i class="ri-delete-bin-line"></i>
+                    <span>Reset Panel</span>
+                </div>
+                <p class="settings-desc">Hapus semua data lokal (riwayat top up, profit, log). Tidak mempengaruhi database.</p>
+                <button class="danger-btn" id="resetPanelBtn">
+                    <i class="ri-delete-bin-6-line"></i>
+                    <span>Reset Semua Data Lokal</span>
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<nav class="bottom-nav">
+    <button class="nav-btn active" data-tab="home">
+        <i class="ri-home-4-line"></i>
+        <span>Home</span>
+    </button>
+    <button class="nav-btn" data-tab="user">
+        <i class="ri-user-line"></i>
+        <span>User</span>
+    </button>
+    <button class="nav-btn" data-tab="saldo">
+        <i class="ri-wallet-3-line"></i>
+        <span>Saldo</span>
+    </button>
+    <button class="nav-btn" data-tab="profit">
+        <i class="ri-money-dollar-circle-line"></i>
+        <span>Profit</span>
+    </button>
+    <button class="nav-btn" data-tab="more" id="moreNavBtn">
+        <i class="ri-more-2-line"></i>
+        <span>Lain</span>
+    </button>
+</nav>
+
+<div class="more-menu" id="moreMenu">
+    <div class="more-menu-content">
+        <div class="more-menu-header">
+            <h3>Menu Lainnya</h3>
+            <button class="more-menu-close" id="closeMoreMenu">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="more-menu-list">
+            <button class="more-menu-item" data-tab="transaksi">
+                <i class="ri-file-list-3-line"></i>
+                <div>
+                    <span class="more-item-title">Transaksi</span>
+                    <span class="more-item-sub">Semua transaksi user</span>
+                </div>
+            </button>
+            <button class="more-menu-item" data-tab="stats">
+                <i class="ri-bar-chart-box-line"></i>
+                <div>
+                    <span class="more-item-title">Statistik</span>
+                    <span class="more-item-sub">Top user & data toko</span>
+                </div>
+            </button>
+            <button class="more-menu-item" data-tab="settings">
+                <i class="ri-settings-3-line"></i>
+                <div>
+                    <span class="more-item-title">Pengaturan</span>
+                    <span class="more-item-sub">Tema & info panel</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-box">
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loadingText">Memproses...</div>
+    </div>
+</div>
+
+<div class="modal" id="confirmModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <i class="ri-alert-line"></i>
+            <h3 id="confirmTitle">Konfirmasi</h3>
+        </div>
+        <div class="modal-body">
+            <div class="confirm-detail" id="confirmDetail"></div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-cancel" id="cancelConfirm">Batal</button>
+            <button class="btn-ok" id="okConfirm">
+                <i class="ri-check-line"></i> Ya
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="formModal">
+    <div class="modal-box">
+        <div class="modal-header purple">
+            <i class="ri-edit-line"></i>
+            <h3 id="formModalTitle">Edit</h3>
+        </div>
+        <div class="modal-body" id="formModalBody"></div>
+        <div class="modal-actions">
+            <button class="btn-cancel" id="cancelFormBtn">Batal</button>
+            <button class="btn-ok" id="saveFormBtn">
+                <i class="ri-save-line"></i> Simpan
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="success-modal" id="successModal">
+    <div class="success-box">
+        <div class="success-icon">
+            <i class="ri-checkbox-circle-fill"></i>
+        </div>
+        <h3>Berhasil</h3>
+        <div class="success-detail" id="successDetail"></div>
+
+        <div class="receipt-box" id="receiptBox">
+            <div class="receipt-header">
+                <i class="ri-file-text-line"></i>
+                <span>Struk untuk Pembeli</span>
+            </div>
+            <pre class="receipt-text" id="receiptText"></pre>
+        </div>
+
+        <div class="success-actions" id="receiptActions">
+            <button class="btn-copy-receipt" id="copyReceiptBtn">
+                <i class="ri-file-copy-line"></i>
+                <span>Salin</span>
+            </button>
+            <button class="btn-send-wa" id="sendWaBtn">
+                <i class="ri-whatsapp-line"></i>
+                <span>Kirim WA</span>
+            </button>
+        </div>
+
+        <button class="success-btn" id="closeSuccess">
+            <i class="ri-check-line"></i> Selesai
+        </button>
+    </div>
+</div>
+
+<button class="install-btn" id="installBtn" style="display:none;">
+    <i class="ri-download-2-line"></i>
+    <span>Install Aplikasi</span>
+</button>
+
+<script src="script.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js')
+            .then(function(reg) {
+                console.log('SW registered:', reg.scope);
+            })
+            .catch(function(err) {
+                console.log('SW failed:', err);
+            });
+    });
+}
+</script>
+
+</body>
+</html>

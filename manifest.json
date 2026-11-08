@@ -1,0 +1,32 @@
+{
+    "name": "Admin Panel - YussXy",
+    "short_name": "Admin YussXy",
+    "description": "Panel admin untuk kelola saldo dan user YussXy Store",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ede9fe",
+    "theme_color": "#7c3aed",
+    "lang": "id",
+    "icons": [
+        {
+            "src": "logo.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg",
+            "purpose": "any"
+        },
+        {
+            "src": "logo.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg",
+            "purpose": "any"
+        },
+        {
+            "src": "logo.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg",
+            "purpose": "maskable"
+        }
+    ]
+}
