@@ -137,13 +137,13 @@
                         <i class="ri-wallet-line"></i>
                         <span>Kelola Saldo</span>
                     </button>
+                    <button class="quick-menu-item" data-tab="promo">
+                        <i class="ri-price-tag-3-line"></i>
+                        <span>Promo</span>
+                    </button>
                     <button class="quick-menu-item" data-tab="transaksi">
                         <i class="ri-file-list-3-line"></i>
                         <span>Transaksi</span>
-                    </button>
-                    <button class="quick-menu-item" data-tab="profit">
-                        <i class="ri-money-dollar-circle-line"></i>
-                        <span>Profit</span>
                     </button>
                 </div>
             </section>
@@ -399,6 +399,273 @@
 
         </div>
 
+<div class="tab-content" id="tab-promo">
+
+    <div class="form-card">
+        <div class="form-title-small">
+            <i class="ri-price-tag-3-line"></i>
+            <span id="promoFormTitle">Buat Promo Diskon</span>
+        </div>
+
+        <input type="hidden" id="promoEditId" value="">
+
+        <div class="input-group">
+            <label><i class="ri-shopping-bag-3-line"></i> Produk</label>
+            <div class="input-wrapper">
+                <select id="promoProductId" class="filter-select">
+                    <option value="">— Pilih Produk —</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-group" id="promoSubServiceGroup" style="display:none;">
+            <label id="promoSubServiceLabel"><i class="ri-list-check"></i> Sub-Layanan</label>
+
+            <div class="input-wrapper" id="promoServiceDropdownWrap">
+                <select id="promoServiceId" class="filter-select">
+                    <option value="">— Pilih Sub-Layanan —</option>
+                </select>
+            </div>
+
+            <div class="input-wrapper" id="promoServiceManualWrap" style="display:none;">
+                <i class="ri-hashtag" style="font-size:16px;color:var(--accent);margin-right:8px;"></i>
+                <input type="text" id="promoServiceIdManual" placeholder="Masukkan Service ID" autocomplete="off">
+            </div>
+
+            <p id="promoSubServiceHint" style="font-size:10px;color:var(--text-dim);margin-top:6px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;">
+                Diskon akan berlaku untuk layanan ini saja
+            </p>
+        </div>
+
+        <input type="hidden" id="promoServiceType" value="generic">
+
+        <div class="input-group">
+            <label><i class="ri-text"></i> Nama Tampilan</label>
+            <div class="input-wrapper">
+                <input type="text" id="promoNama" placeholder="Nama produk saat promo" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-bar-chart-line"></i> Jumlah di Promo</label>
+            <div class="input-wrapper">
+                <input type="number" id="promoJumlah" placeholder="Contoh: 1000" min="1" inputmode="numeric">
+            </div>
+            <p style="font-size:10px;color:var(--text-dim);margin-top:6px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;">
+                Jumlah unit untuk paket promo ini (misal: 1000 pengikut, 5000 view)
+            </p>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-money-dollar-circle-line"></i> Harga Awal</label>
+            <div class="input-wrapper">
+                <span class="input-prefix">Rp</span>
+                <input type="number" id="promoHargaAwal" placeholder="0" min="1" inputmode="numeric">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-price-tag-2-line"></i> Harga Diskon</label>
+            <div class="input-wrapper">
+                <span class="input-prefix">Rp</span>
+                <input type="number" id="promoHargaDiskon" placeholder="0" min="1" inputmode="numeric">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-image-line"></i> Gambar Promo</label>
+            <div class="input-wrapper" style="padding:8px 12px;">
+                <input type="file" id="promoGambarFile" accept="image/*" style="border:none;background:transparent;padding:6px 0;font-size:11px;">
+            </div>
+            <div id="promoImagePreview" style="margin-top:10px;display:none;">
+                <img id="promoImagePreviewImg" src="" alt="Preview" style="width:100%;max-height:180px;object-fit:cover;border:2px solid var(--border-color);border-radius:10px;">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-time-line"></i> Aktif Dari Jam</label>
+            <div class="input-wrapper">
+                <input type="time" id="promoDariJam" value="00:00">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-time-line"></i> Aktif Sampai Jam</label>
+            <div class="input-wrapper">
+                <input type="time" id="promoSampaiJam" value="23:59">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-group-line"></i> Kuota User</label>
+            <div class="input-wrapper">
+                <input type="number" id="promoKuota" placeholder="0" min="1" inputmode="numeric">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-toggle-line"></i> Status</label>
+            <div class="type-selector">
+                <button class="type-btn active" data-promo-status="true">
+                    <i class="ri-check-line"></i> Aktif
+                </button>
+                <button class="type-btn" data-promo-status="false">
+                    <i class="ri-close-line"></i> Nonaktif
+                </button>
+            </div>
+        </div>
+
+        <button class="submit-btn" id="promoSubmitBtn">
+            <i class="ri-save-line"></i>
+            <span id="promoSubmitText">Simpan Promo</span>
+        </button>
+
+        <button class="danger-btn" id="promoCancelEditBtn" style="display:none;margin-top:10px;">
+            <i class="ri-close-line"></i>
+            <span>Batal Edit</span>
+        </button>
+    </div>
+
+    <div class="filter-row">
+        <div class="filter-input-wrapper">
+            <i class="ri-filter-3-line"></i>
+            <select id="promoFilterStatus" class="filter-select">
+                <option value="all">Semua Status</option>
+                <option value="active">Aktif</option>
+                <option value="inactive">Nonaktif</option>
+                <option value="expired">Kuota Habis</option>
+            </select>
+        </div>
+        <button class="clear-btn" id="promoRefreshBtn">
+            <i class="ri-refresh-line"></i>
+        </button>
+    </div>
+
+    <div class="riwayat-card">
+        <div class="riwayat-header">
+            <div class="riwayat-title">
+                <i class="ri-list-check-2"></i>
+                <span>Daftar Promo</span>
+            </div>
+            <span class="riwayat-count" id="promoCount">0</span>
+        </div>
+        <div class="riwayat-list" id="promoList">
+            <div class="riwayat-empty">
+                <i class="ri-loader-4-line spin"></i>
+                <p>Memuat...</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+        <div class="tab-content" id="tab-redeem">
+
+    <div class="form-card">
+        <div class="form-title-small">
+            <i class="ri-gift-2-line"></i>
+            <span id="redeemFormTitle">Buat Kode Redeem</span>
+        </div>
+
+        <input type="hidden" id="redeemEditId" value="">
+
+        <div class="input-group">
+            <label><i class="ri-key-2-line"></i> Kode Redeem</label>
+            <div class="redeem-kode-row">
+                <div class="input-wrapper" style="flex:1;">
+                    <input type="text" id="redeemKode" placeholder="Contoh: YSX-NEWYEAR2025" autocomplete="off" style="text-transform:uppercase">
+                </div>
+                <button type="button" class="redeem-generate-btn" id="redeemGenerateBtn" title="Acak kode">
+                    <i class="ri-shuffle-line"></i>
+                </button>
+            </div>
+            <p style="font-size:10px;color:var(--text-dim);margin-top:6px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;">
+                Huruf besar, tanpa spasi. Klik tombol acak untuk generate otomatis.
+            </p>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-gift-line"></i> Daftar Hadiah (acak saat diklaim)</label>
+            <div id="redeemHadiahList" style="display:flex;flex-direction:column;gap:10px;"></div>
+<button class="type-btn" type="button" id="redeemAddHadiahBtn" style="margin-top:8px;width:100%;justify-content:center;background:var(--accent);color:var(--white)">
+    <i class="ri-add-line"></i> Tambah Hadiah
+</button>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-group-line"></i> Maksimal Klaim</label>
+            <div class="input-wrapper">
+                <input type="number" id="redeemMaxKlaim" placeholder="10" min="1" value="10" inputmode="numeric">
+            </div>
+            <p style="font-size:10px;color:var(--text-dim);margin-top:6px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;">
+                Total user yang bisa klaim kode ini.
+            </p>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-time-line"></i> Expired (kosongkan = tidak pernah)</label>
+            <div class="input-wrapper">
+                <input type="datetime-local" id="redeemExpired" style="color:var(--text);font-weight:700;width:100%;font-family:inherit;">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="ri-toggle-line"></i> Status</label>
+            <div class="type-selector">
+                <button class="type-btn active" data-redeem-status="true">
+                    <i class="ri-check-line"></i> Aktif
+                </button>
+                <button class="type-btn" data-redeem-status="false">
+                    <i class="ri-close-line"></i> Nonaktif
+                </button>
+            </div>
+        </div>
+
+        <button class="submit-btn" id="redeemSubmitBtn">
+            <i class="ri-save-line"></i>
+            <span id="redeemSubmitText">Simpan Kode</span>
+        </button>
+
+        <button class="danger-btn" id="redeemCancelEditBtn" style="display:none;margin-top:10px;">
+            <i class="ri-close-line"></i>
+            <span>Batal Edit</span>
+        </button>
+    </div>
+
+    <div class="filter-row">
+        <div class="filter-input-wrapper">
+            <i class="ri-filter-3-line"></i>
+            <select id="redeemFilterStatus" class="filter-select">
+                <option value="all">Semua Status</option>
+                <option value="active">Aktif</option>
+                <option value="inactive">Nonaktif</option>
+                <option value="expired">Expired</option>
+                <option value="full">Kuota Habis</option>
+            </select>
+        </div>
+        <button class="clear-btn" id="redeemRefreshBtn">
+            <i class="ri-refresh-line"></i>
+        </button>
+    </div>
+
+    <div class="riwayat-card">
+        <div class="riwayat-header">
+            <div class="riwayat-title">
+                <i class="ri-list-check-2"></i>
+                <span>Daftar Kode Redeem</span>
+            </div>
+            <span class="riwayat-count" id="redeemCount">0</span>
+        </div>
+        <div class="riwayat-list" id="redeemList">
+            <div class="riwayat-empty">
+                <i class="ri-loader-4-line spin"></i>
+                <p>Memuat...</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
         <div class="tab-content" id="tab-profit">
 
             <div class="form-card">
@@ -627,7 +894,7 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label"><i class="ri-calendar-line"></i> Versi</span>
-                        <span class="info-value">v2.0</span>
+                        <span class="info-value">v2.1</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label"><i class="ri-time-line"></i> Uptime</span>
@@ -667,9 +934,13 @@
         <i class="ri-wallet-3-line"></i>
         <span>Saldo</span>
     </button>
-    <button class="nav-btn" data-tab="profit">
-        <i class="ri-money-dollar-circle-line"></i>
-        <span>Profit</span>
+    <button class="nav-btn" data-tab="promo">
+        <i class="ri-price-tag-3-line"></i>
+        <span>Promo</span>
+    </button>
+    <button class="nav-btn" data-tab="redeem">
+        <i class="ri-gift-2-line"></i>
+        <span>Redeem</span>
     </button>
     <button class="nav-btn" data-tab="more" id="moreNavBtn">
         <i class="ri-more-2-line"></i>
@@ -686,6 +957,20 @@
             </button>
         </div>
         <div class="more-menu-list">
+            <button class="more-menu-item" data-tab="redeem">
+                <i class="ri-gift-2-line"></i>
+                <div>
+                    <span class="more-item-title">Redeem Code</span>
+                    <span class="more-item-sub">Kelola kode hadiah</span>
+                </div>
+            </button>
+            <button class="more-menu-item" data-tab="profit">
+                <i class="ri-money-dollar-circle-line"></i>
+                <div>
+                    <span class="more-item-title">Profit</span>
+                    <span class="more-item-sub">Catatan untung/rugi</span>
+                </div>
+            </button>
             <button class="more-menu-item" data-tab="transaksi">
                 <i class="ri-file-list-3-line"></i>
                 <div>
@@ -791,6 +1076,8 @@
 </button>
 
 <script src="script.js"></script>
+<script src="redem-script.js"></script>
+<script src="promo-script.js"></script>
 <script>
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -806,4 +1093,4 @@ if ('serviceWorker' in navigator) {
 </script>
 
 </body>
-</html>
+                                                                </html>
